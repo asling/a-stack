@@ -6,7 +6,15 @@ export class Queue(){
 		this.dataStore.push(ele);
 	}
 	dequeue(){
-		return this.dataStore.shift();
+		var priority = this.dataStore[0].code;
+		var index = 0;
+		for(var i = 1;i<this.dataStore.length; ++i){
+			if(this.dataStore[i].code < priority){
+				index = i;
+				priority = this.dataStore[i];
+			}
+		}
+		return this.dataStore.splice(index,1);
 	}
 	front(){
 		return this.dataStore[0];
