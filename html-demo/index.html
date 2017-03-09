@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>html demo</title>
+	<style type="text/css">
+		#list li{background-color:#000;color:#fff;width:230px;height:30px;line-height: 30px;text-align: center;}
+		#list .red{background-color:#f00;}
+	</style>
+</head>
+<body>
+	<div id="fieldHolder">
+		<input class='name-field' value='' placeholder='填写信息'>
+		<button type="button" id="addItem">添加</button>
+	</div>
+	<ul id="list">
+		<li>demo</li>
+	</ul> 
+	<script type="text/javascript">
+		(function(){
+			function trim(str){
+		　　    return str.replace(/(^\s*)|(\s*$)/g, "");
+		　　}
+			function addRedClass(classNameStr){
+				if(classNameStr.search('red') < 0){
+					return trim(classNameStr)+" red";
+				}
+				return classNameStr;
+			}
+			function validated(item){
+				return item.style.value;
+			}
+			function addAnItem(name,className){
+				var node = document.createElement("li");
+				var nameNode = document.createTextNode(name);
+				node.appendChild(nameNode);
+				node.className = className;
+				list.appendChild(node);
+			}
+			function getSize(){
+				return list.children.length+1;
+			}
+			var list = document.querySelector("#list");
+			var nameField = document.querySelector(".name-field");
+			var addItemBtn = document.querySelector("#addItem");
+			addItemBtn.addEventListener("click",function(e){
+				var val = nameField.value;
+				var size = getSize();
+				var className = "";
+				if(!val) return false;
+				if(size % 3 === 0){
+					className = addRedClass(nameField.className);
+				}
+				addAnItem(val,className);
+			});
+		})();
+	</script>
+</body>
+</html>
